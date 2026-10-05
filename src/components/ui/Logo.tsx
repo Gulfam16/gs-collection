@@ -1,6 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
-import { Sparkles } from "lucide-react";
 
 interface LogoProps {
   className?: string;
@@ -10,9 +8,24 @@ interface LogoProps {
 
 export function Logo({ className = "", isDark = false, size = "md" }: LogoProps) {
   const sizeClasses = {
-    sm: { title: "text-lg", sub: "text-[9px]", badge: "w-8 h-8 text-xs rounded-xl" },
-    md: { title: "text-2xl", sub: "text-[10px]", badge: "w-11 h-11 text-sm rounded-2xl" },
-    lg: { title: "text-3xl", sub: "text-[11px]", badge: "w-14 h-14 text-base rounded-2xl" },
+    sm: {
+      emblem: "w-8 h-8 text-sm",
+      title: "text-base tracking-[0.18em]",
+      sub: "text-[7.5px] tracking-[0.24em]",
+      gap: "gap-2.5",
+    },
+    md: {
+      emblem: "w-10 h-10 text-base",
+      title: "text-lg tracking-[0.2em]",
+      sub: "text-[8.5px] tracking-[0.26em]",
+      gap: "gap-3",
+    },
+    lg: {
+      emblem: "w-12 h-12 text-lg",
+      title: "text-xl tracking-[0.22em]",
+      sub: "text-[9.5px] tracking-[0.28em]",
+      gap: "gap-3.5",
+    },
   };
 
   const current = sizeClasses[size];
@@ -20,37 +33,39 @@ export function Logo({ className = "", isDark = false, size = "md" }: LogoProps)
   return (
     <Link
       href="/"
-      className={`inline-flex items-center gap-3 group transition-all select-none ${className}`}
+      className={`inline-flex items-center ${current.gap} group transition-all select-none ${className}`}
     >
-      {/* Playful & Premium Brand Monogram Badge */}
+      {/* Refined Architectural Monogram */}
       <div
-        className={`relative ${current.badge} bg-gradient-to-tr from-[#E05A47] via-[#EA580C] to-[#F59E0B] text-white flex items-center justify-center font-black tracking-wider shadow-md shadow-[#E05A47]/25 group-hover:scale-105 group-hover:rotate-2 transition-all duration-300 shrink-0`}
+        className={`relative ${current.emblem} rounded-xl flex items-center justify-center font-serif font-black transition-all duration-300 shrink-0 ${
+          isDark
+            ? "bg-slate-800 text-white border border-slate-700 shadow-xs"
+            : "bg-[#0F172A] text-white shadow-xs group-hover:bg-[#E05A47]"
+        }`}
       >
-        <span className="drop-shadow-xs">GS</span>
-        {/* Cute Sparkling Star Accent */}
-        <span className="absolute -top-1 -right-1 text-[10px] transform group-hover:scale-125 transition-transform duration-300">
-          ✨
-        </span>
+        <span className="leading-none tracking-tight italic">GS</span>
+        {/* Subtle Fashion House Corner Dot */}
+        <span className="absolute -bottom-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-[#E05A47]" />
       </div>
 
-      {/* Brand Name & Tagline */}
-      <div className="flex flex-col">
-        <div className="flex items-center gap-1.5 leading-none">
+      {/* Haute Couture Typography */}
+      <div className="flex flex-col justify-center">
+        <span
+          className={`font-serif font-black uppercase leading-tight ${current.title} ${
+            isDark ? "text-white" : "text-[#0F172A] group-hover:text-[#E05A47]"
+          } transition-colors`}
+        >
+          GS COLLECTION
+        </span>
+        <div className="flex items-center gap-1.5 mt-0.5">
           <span
-            className={`font-black tracking-tight ${current.title} ${
-              isDark ? "text-white" : "text-slate-900 group-hover:text-[#E05A47]"
-            } transition-colors`}
+            className={`font-sans font-bold uppercase ${current.sub} ${
+              isDark ? "text-slate-400" : "text-[#E05A47]"
+            }`}
           >
-            GS Collection
+            GULLU SHANI CLOTHING
           </span>
         </div>
-        <span
-          className={`uppercase font-extrabold tracking-widest mt-1 ${current.sub} ${
-            isDark ? "text-[#F59E0B]" : "text-[#E05A47]"
-          }`}
-        >
-          Gullu Shani Clothing
-        </span>
       </div>
     </Link>
   );
