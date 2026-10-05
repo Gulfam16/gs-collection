@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Sparkles } from "lucide-react";
 
 interface LogoProps {
   className?: string;
@@ -8,47 +9,44 @@ interface LogoProps {
 }
 
 export function Logo({ className = "", isDark = false, size = "md" }: LogoProps) {
-  const dimensions = {
-    sm: { width: 36, height: 36, text: "text-lg", sub: "text-[9px]" },
-    md: { width: 48, height: 48, text: "text-2xl", sub: "text-[10px]" },
-    lg: { width: 60, height: 60, text: "text-3xl", sub: "text-[11px]" },
+  const sizeClasses = {
+    sm: { title: "text-lg", sub: "text-[9px]", badge: "w-8 h-8 text-xs rounded-xl" },
+    md: { title: "text-2xl", sub: "text-[10px]", badge: "w-11 h-11 text-sm rounded-2xl" },
+    lg: { title: "text-3xl", sub: "text-[11px]", badge: "w-14 h-14 text-base rounded-2xl" },
   };
 
-  const current = dimensions[size];
+  const current = sizeClasses[size];
 
   return (
-    <Link href="/" className={`inline-flex items-center gap-3 group transition-all ${className}`}>
-      {/* Brand Monogram Emblem */}
+    <Link
+      href="/"
+      className={`inline-flex items-center gap-3 group transition-all select-none ${className}`}
+    >
+      {/* Playful & Premium Brand Monogram Badge */}
       <div
-        className={`relative overflow-hidden rounded-xl border transition-transform group-hover:scale-105 shrink-0 ${
-          isDark
-            ? "border-slate-700 bg-white/95 shadow-sm"
-            : "border-slate-200/80 bg-white shadow-xs"
-        }`}
-        style={{ width: current.width, height: current.height }}
+        className={`relative ${current.badge} bg-gradient-to-tr from-[#E05A47] via-[#EA580C] to-[#F59E0B] text-white flex items-center justify-center font-black tracking-wider shadow-md shadow-[#E05A47]/25 group-hover:scale-105 group-hover:rotate-2 transition-all duration-300 shrink-0`}
       >
-        <Image
-          src="/images/logo.png"
-          alt="GS Collection Logo"
-          width={current.width}
-          height={current.height}
-          priority
-          className="object-cover w-full h-full"
-        />
+        <span className="drop-shadow-xs">GS</span>
+        {/* Cute Sparkling Star Accent */}
+        <span className="absolute -top-1 -right-1 text-[10px] transform group-hover:scale-125 transition-transform duration-300">
+          ✨
+        </span>
       </div>
 
-      {/* Brand Typography */}
+      {/* Brand Name & Tagline */}
       <div className="flex flex-col">
+        <div className="flex items-center gap-1.5 leading-none">
+          <span
+            className={`font-black tracking-tight ${current.title} ${
+              isDark ? "text-white" : "text-slate-900 group-hover:text-[#E05A47]"
+            } transition-colors`}
+          >
+            GS Collection
+          </span>
+        </div>
         <span
-          className={`font-black tracking-tight leading-none ${current.text} ${
-            isDark ? "text-white" : "text-slate-900"
-          }`}
-        >
-          GS Collection
-        </span>
-        <span
-          className={`uppercase font-bold tracking-widest mt-0.5 ${current.sub} ${
-            isDark ? "text-slate-400" : "text-slate-500"
+          className={`uppercase font-extrabold tracking-widest mt-1 ${current.sub} ${
+            isDark ? "text-[#F59E0B]" : "text-[#E05A47]"
           }`}
         >
           Gullu Shani Clothing
