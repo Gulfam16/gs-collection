@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 interface LogoProps {
   className?: string;
@@ -7,66 +8,28 @@ interface LogoProps {
 }
 
 export function Logo({ className = "", isDark = false, size = "md" }: LogoProps) {
-  const sizeClasses = {
-    sm: {
-      emblem: "w-8 h-8 text-sm",
-      title: "text-base tracking-[0.18em]",
-      sub: "text-[7.5px] tracking-[0.24em]",
-      gap: "gap-2.5",
-    },
-    md: {
-      emblem: "w-10 h-10 text-base",
-      title: "text-lg tracking-[0.2em]",
-      sub: "text-[8.5px] tracking-[0.26em]",
-      gap: "gap-3",
-    },
-    lg: {
-      emblem: "w-12 h-12 text-lg",
-      title: "text-xl tracking-[0.22em]",
-      sub: "text-[9.5px] tracking-[0.28em]",
-      gap: "gap-3.5",
-    },
+  const sizeMap = {
+    sm: { width: 106, height: 60, maxHeightClass: "max-h-[50px]" },
+    md: { width: 124, height: 70, maxHeightClass: "max-h-[60px]" },
+    lg: { width: 160, height: 90, maxHeightClass: "max-h-[76px]" },
   };
 
-  const current = sizeClasses[size];
+  const current = sizeMap[size];
 
   return (
     <Link
       href="/"
-      className={`inline-flex items-center ${current.gap} group transition-all select-none ${className}`}
+      className={`inline-flex items-center justify-center transition-transform duration-300 hover:scale-[1.03] active:scale-[0.98] select-none ${className}`}
+      aria-label="GS Collection — Gullu Shani Clothing"
     >
-      {/* Refined Architectural Monogram */}
-      <div
-        className={`relative ${current.emblem} rounded-xl flex items-center justify-center font-serif font-black transition-all duration-300 shrink-0 ${
-          isDark
-            ? "bg-slate-800 text-white border border-slate-700 shadow-xs"
-            : "bg-[#0F172A] text-white shadow-xs group-hover:bg-[#E05A47]"
-        }`}
-      >
-        <span className="leading-none tracking-tight italic">GS</span>
-        {/* Subtle Fashion House Corner Dot */}
-        <span className="absolute -bottom-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-[#E05A47]" />
-      </div>
-
-      {/* Haute Couture Typography */}
-      <div className="flex flex-col justify-center">
-        <span
-          className={`font-serif font-black uppercase leading-tight ${current.title} ${
-            isDark ? "text-white" : "text-[#0F172A] group-hover:text-[#E05A47]"
-          } transition-colors`}
-        >
-          GS COLLECTION
-        </span>
-        <div className="flex items-center gap-1.5 mt-0.5">
-          <span
-            className={`font-sans font-bold uppercase ${current.sub} ${
-              isDark ? "text-slate-400" : "text-[#E05A47]"
-            }`}
-          >
-            GULLU SHANI CLOTHING
-          </span>
-        </div>
-      </div>
+      <Image
+        src={isDark ? "/images/logo-light.png" : "/images/logo-transparent.png"}
+        alt="GS Collection — Gullu Shani Clothing"
+        width={current.width}
+        height={current.height}
+        priority
+        className={`w-auto ${current.maxHeightClass} object-contain transition-all drop-shadow-2xs`}
+      />
     </Link>
   );
 }

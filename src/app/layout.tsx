@@ -27,13 +27,13 @@ export const metadata: Metadata = {
     url: "https://gscollection.pk",
     siteName: "GS Collection — Gullu Shani Clothing",
     title: "GS Collection — Gullu Shani Clothing | Premium Kids Fashion",
-    description: "Little Styles. Big Smiles. Premium fashion crafted for active, happy kids.",
+    description: "Timeless Elegance. Handcrafted for Little Wonders. Pakistan's premier childrenswear atelier for ages 0 to 13.",
     images: [
       {
         url: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?q=80&w=1200&auto=format&fit=crop",
         width: 1200,
         height: 630,
-        alt: "GS Collection Children's Clothing",
+        alt: "GS Collection Children's Luxury Clothing",
       },
     ],
   },
@@ -46,7 +46,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full">
-      <body className="min-h-full flex flex-col font-sans bg-[#FDFBF7] text-slate-900 selection:bg-[#E05A47]/20 selection:text-[#E05A47]">
+      <body className="min-h-full flex flex-col font-sans bg-[#FAF8F5] text-[#0B132A] selection:bg-[#C05646]/20 selection:text-[#C05646]">
         {children}
         <CartDrawer />
         <ToastContainer />

@@ -13,13 +13,13 @@ import {
 
 export function Footer() {
   return (
-    <footer className="bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800">
+    <footer className="bg-[#0B132A] text-slate-300 pt-16 pb-12 border-t border-slate-800/80">
       {/* Value Proposition Badges */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 border-b border-slate-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 border-b border-slate-800/80">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-slate-800 text-[#E05A47] flex items-center justify-center shrink-0">
-              <Truck className="w-6 h-6" />
+            <div className="w-12 h-12 rounded-2xl bg-[#0F172A] text-[#C05646] border border-slate-800 flex items-center justify-center shrink-0">
+              <Truck className="w-5 h-5" />
             </div>
             <div>
               <h4 className="font-bold text-white text-sm">Free Nationwide Delivery</h4>
@@ -28,8 +28,8 @@ export function Footer() {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-slate-800 text-[#F59E0B] flex items-center justify-center shrink-0">
-              <RotateCcw className="w-6 h-6" />
+            <div className="w-12 h-12 rounded-2xl bg-[#0F172A] text-[#C5A059] border border-slate-800 flex items-center justify-center shrink-0">
+              <RotateCcw className="w-5 h-5" />
             </div>
             <div>
               <h4 className="font-bold text-white text-sm">7-Day Easy Exchange</h4>
@@ -38,22 +38,22 @@ export function Footer() {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-slate-800 text-emerald-400 flex items-center justify-center shrink-0">
-              <ShieldCheck className="w-6 h-6" />
+            <div className="w-12 h-12 rounded-2xl bg-[#0F172A] text-emerald-400 border border-slate-800 flex items-center justify-center shrink-0">
+              <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="font-bold text-white text-sm">100% Kid-Safe Cotton</h4>
-              <p className="text-xs text-slate-400">Non-toxic dyes & breathable fabric</p>
+              <h4 className="font-bold text-white text-sm">100% GOTS Pure Cotton</h4>
+              <p className="text-xs text-slate-400">Hypoallergenic & delicate on skin</p>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-slate-800 text-sky-400 flex items-center justify-center shrink-0">
-              <HeartHandshake className="w-6 h-6" />
+            <div className="w-12 h-12 rounded-2xl bg-[#0F172A] text-sky-400 border border-slate-800 flex items-center justify-center shrink-0">
+              <HeartHandshake className="w-5 h-5" />
             </div>
             <div>
               <h4 className="font-bold text-white text-sm">Cash on Delivery</h4>
-              <p className="text-xs text-slate-400">Pay conveniently at your doorstep</p>
+              <p className="text-xs text-slate-400">Pay safely at your doorstep</p>
             </div>
           </div>
         </div>
@@ -73,7 +73,7 @@ export function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-[#E05A47] transition-all"
+                className="w-9 h-9 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-[#C05646] transition-all"
                 aria-label="Instagram"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -84,7 +84,7 @@ export function Footer() {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-[#E05A47] transition-all"
+                className="w-9 h-9 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-[#C05646] transition-all"
                 aria-label="Facebook"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -120,7 +120,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/shop?onSale=true" className="text-[#E05A47] font-semibold hover:text-rose-400 transition-colors">
+                <Link href="/shop?onSale=true" className="text-[#C05646] font-semibold hover:text-rose-400 transition-colors">
                   Special Sale %
                 </Link>
               </li>
@@ -164,7 +164,7 @@ export function Footer() {
             <h4 className="font-bold text-white text-sm mb-4">Store Information</h4>
             <ul className="space-y-3 text-xs text-slate-400">
               <li className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#E05A47] shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-[#C05646] shrink-0 mt-0.5" />
                 <span>Lahore, Punjab, Pakistan</span>
               </li>
               <li className="flex items-center gap-2.5">

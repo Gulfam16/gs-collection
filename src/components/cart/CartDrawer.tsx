@@ -71,7 +71,7 @@ export function CartDrawer() {
         {/* Header */}
         <div className="p-4 border-b border-slate-100 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <ShoppingBag className="w-5 h-5 text-[#E05A47]" />
+            <ShoppingBag className="w-5 h-5 text-[#C05646]" />
             <h2 className="font-bold text-lg text-slate-900">Your Shopping Cart</h2>
             <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-semibold">
               {items.reduce((acc, i) => acc + i.quantity, 0)}
@@ -102,7 +102,7 @@ export function CartDrawer() {
           <div className="w-full bg-amber-200/60 h-2 rounded-full overflow-hidden">
             <div
               className={`h-full transition-all duration-500 ${
-                subtotal >= freeShippingThreshold ? "bg-emerald-500" : "bg-[#E05A47]"
+                subtotal >= freeShippingThreshold ? "bg-emerald-500" : "bg-[#C05646]"
               }`}
               style={{ width: `${progressPercent}%` }}
             />
@@ -113,7 +113,7 @@ export function CartDrawer() {
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {items.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-center p-6 space-y-4">
-              <div className="w-16 h-16 rounded-full bg-rose-50 flex items-center justify-center text-[#E05A47]">
+              <div className="w-16 h-16 rounded-full bg-rose-50 flex items-center justify-center text-[#C05646]">
                 <ShoppingBag className="w-8 h-8" />
               </div>
               <div>
@@ -124,7 +124,7 @@ export function CartDrawer() {
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="px-6 py-2.5 bg-[#E05A47] text-white font-semibold rounded-xl hover:bg-[#C74433] transition-colors shadow-sm"
+                className="px-6 py-2.5 bg-[#C05646] text-white font-semibold rounded-xl hover:bg-[#C74433] transition-colors shadow-sm"
               >
                 Shop Kids Collection
               </button>
@@ -228,7 +228,7 @@ export function CartDrawer() {
                   placeholder="Coupon code (e.g. WELCOME10)"
                   value={couponInput}
                   onChange={(e) => setCouponInput(e.target.value)}
-                  className="flex-1 px-3 py-2 text-xs bg-white border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-[#E05A47]/20 uppercase"
+                  className="flex-1 px-3 py-2 text-xs bg-white border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-[#C05646]/20 uppercase"
                 />
                 <button
                   type="submit"
@@ -263,14 +263,14 @@ export function CartDrawer() {
               </div>
               <div className="flex justify-between text-sm font-bold text-slate-900 pt-1.5 border-t border-slate-200">
                 <span>Total Amount</span>
-                <span className="text-[#E05A47] text-base">{formatPrice(total)}</span>
+                <span className="text-[#C05646] text-base">{formatPrice(total)}</span>
               </div>
             </div>
 
             <Link
               href="/checkout"
               onClick={() => setIsOpen(false)}
-              className="w-full flex items-center justify-center gap-2 py-3 bg-[#E05A47] hover:bg-[#C74433] text-white font-bold rounded-xl shadow-md transition-all group"
+              className="w-full flex items-center justify-center gap-2 py-3 bg-[#C05646] hover:bg-[#A84638] text-white font-bold rounded-xl shadow-md transition-all group"
             >
               <span>Proceed to Checkout</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

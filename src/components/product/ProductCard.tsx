@@ -88,7 +88,7 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10 pointer-events-none">
           {discountPercent > 0 && (
-            <span className="bg-[#E05A47] text-white text-[11px] font-black px-2.5 py-0.5 rounded-full shadow-xs tracking-wider">
+            <span className="bg-[#C05646] text-white text-[11px] font-black px-2.5 py-0.5 rounded-full shadow-xs tracking-wider">
               -{discountPercent}%
             </span>
           )}
@@ -110,8 +110,8 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
           aria-label={inWishlist ? "Remove from wishlist" : "Add to wishlist"}
           className={`absolute top-3 right-3 p-2 rounded-full backdrop-blur-md transition-all shadow-xs z-10 ${
             inWishlist
-              ? "bg-rose-50 text-[#E05A47] ring-2 ring-[#E05A47]/30"
-              : "bg-white/80 text-slate-600 hover:bg-white hover:text-[#E05A47]"
+              ? "bg-rose-50 text-[#C05646] ring-2 ring-[#C05646]/30"
+              : "bg-white/80 text-slate-600 hover:bg-white hover:text-[#C05646]"
           }`}
         >
           <Heart className={`w-4 h-4 ${inWishlist ? "fill-current" : ""}`} />
@@ -148,7 +148,7 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
           </div>
 
           {/* Product Name */}
-          <Link href={`/shop/${product.slug}`} className="block group-hover:text-[#E05A47] transition-colors">
+          <Link href={`/shop/${product.slug}`} className="block group-hover:text-[#C05646] transition-colors">
             <h3 className="font-bold text-slate-800 text-sm leading-snug line-clamp-1">
               {product.name}
             </h3>
@@ -191,7 +191,7 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
                 ? "bg-slate-100 text-slate-400 cursor-not-allowed"
                 : isAdding
                 ? "bg-emerald-600 text-white scale-95"
-                : "bg-slate-900 hover:bg-[#E05A47] text-white hover:shadow-md hover:scale-105 active:scale-95"
+                : "bg-slate-900 hover:bg-[#C05646] text-white hover:shadow-md hover:scale-105 active:scale-95"
             }`}
             title={isOutOfStock ? "Out of stock" : "Add to cart"}
           >
