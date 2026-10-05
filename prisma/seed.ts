@@ -73,7 +73,52 @@ async function main() {
   }
   console.log("✓ Coupons seeded.");
 
-  console.log("🎉 Database seeding completed successfully!");
+  // 5. Seed Products & Variants
+  for (const prod of MOCK_PRODUCTS) {
+    const existing = await prisma.product.findUnique({ where: { slug: prod.slug } });
+    if (!existing) {
+      await prisma.product.create({
+        data: {
+          id: prod.id,
+          name: prod.name,
+          slug: prod.slug,
+          description: prod.description,
+          fabricMaterial: prod.fabricMaterial,
+          careInstructions: prod.careInstructions,
+          gender: prod.gender,
+          ageGroup: prod.ageGroup,
+          basePrice: prod.basePrice,
+          salePrice: prod.salePrice || null,
+          isFeatured: prod.isFeatured,
+          isNewArrival: prod.isNewArrival,
+          isActive: prod.isActive,
+          categoryId: prod.categoryId,
+          images: {
+            create: prod.images.map((img) => ({
+              id: img.id,
+              imageUrl: img.imageUrl,
+              altText: img.altText,
+              isPrimary: img.isPrimary,
+              displayOrder: img.displayOrder,
+            })),
+          },
+          variants: {
+            create: prod.variants.map((v) => ({
+              id: v.id,
+              sizeId: v.sizeId,
+              colorId: v.colorId,
+              sku: v.sku,
+              stockQuantity: v.stockQuantity,
+              priceOverride: v.priceOverride || null,
+            })),
+          },
+        },
+      });
+    }
+  }
+  console.log("✓ Products & Variants seeded.");
+
+  console.log("🎉 All live database records seeded successfully!");
 }
 
 main()
