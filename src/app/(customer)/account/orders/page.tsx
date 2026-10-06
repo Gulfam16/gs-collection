@@ -81,7 +81,7 @@ export default function CustomerOrdersPage() {
                       <div>
                         <Link
                           href={`/shop/${item.productSlug}`}
-                          className="font-bold text-slate-900 hover:text-[#E05A47] transition-colors"
+                          className="font-bold text-slate-900 hover:text-[#C05646] transition-colors"
                         >
                           {item.productName}
                         </Link>

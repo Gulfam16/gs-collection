@@ -604,6 +604,7 @@ export const MOCK_USERS: UserProfile[] = [
     role: "CUSTOMER",
     addresses: [
       {
+        id: "addr-ayesha-1",
         recipientName: "Ayesha Malik",
         phone: "+92 300 1234567",
         streetAddress: "House 42-B, Street 14, Phase 5, DHA",

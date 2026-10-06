@@ -65,7 +65,7 @@ export default function CustomerAddressesPage() {
         </div>
         <button
           onClick={() => setShowAddModal(true)}
-          className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#E05A47] hover:bg-[#C74433] text-white font-bold text-xs rounded-xl shadow-xs transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#C05646] hover:bg-[#A84638] text-white font-bold text-xs rounded-xl shadow-xs transition-colors"
         >
           <Plus className="w-4 h-4" />
           <span>Add New Address</span>
@@ -73,9 +73,9 @@ export default function CustomerAddressesPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {addresses.map((addr) => (
+        {addresses.map((addr, idx) => (
           <div
-            key={addr.id}
+            key={addr.id || `addr-${idx}-${addr.streetAddress || addr.phone || idx}`}
             className="p-5 rounded-2xl border border-slate-200/80 bg-slate-50/50 space-y-3 relative"
           >
             <div className="flex justify-between items-start">
@@ -178,7 +178,7 @@ export default function CustomerAddressesPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2 bg-[#E05A47] text-white font-bold rounded-xl hover:bg-[#C74433]"
+                  className="px-6 py-2 bg-[#C05646] text-white font-bold rounded-xl hover:bg-[#A84638]"
                 >
                   Save Address
                 </button>
