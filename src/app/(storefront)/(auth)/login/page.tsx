@@ -119,6 +119,16 @@ export default function LoginPage() {
             Create an Account
           </Link>
         </div>
+
+        <div className="text-center pt-1 border-t border-slate-100">
+          <Link
+            href="/admin/login"
+            className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-[#C05646] font-medium transition-colors py-1"
+          >
+            <ShieldCheck className="w-3.5 h-3.5 text-[#C05646]" />
+            <span>Store Administrator Portal →</span>
+          </Link>
+        </div>
       </div>
     </div>
   );

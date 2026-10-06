@@ -240,6 +240,14 @@ export function Navbar() {
                       >
                         Sign In / Register
                       </Link>
+                      <Link
+                        href="/admin/login"
+                        onClick={() => setUserDropdownOpen(false)}
+                        className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-600 hover:bg-[#FAF8F5] hover:text-[#C05646] rounded-xl border-t border-slate-100 mt-1"
+                      >
+                        <ShieldCheck className="w-3.5 h-3.5 text-[#C05646]" />
+                        <span>Store Admin Portal</span>
+                      </Link>
                     </div>
                   )}
                 </div>
@@ -335,6 +343,14 @@ export function Navbar() {
               className="block py-2 border-b border-slate-100 hover:text-[#C05646]"
             >
               Contact Us
+            </Link>
+            <Link
+              href="/admin/login"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2 py-2.5 text-slate-600 hover:text-[#C05646] font-medium border-t border-slate-100 mt-2 text-sm"
+            >
+              <ShieldCheck className="w-4 h-4 text-[#C05646]" />
+              <span>Store Admin Portal</span>
             </Link>
             {isMounted && isAdmin && (
               <Link

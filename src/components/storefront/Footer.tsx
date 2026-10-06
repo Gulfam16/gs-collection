@@ -190,6 +190,13 @@ export function Footer() {
           <Link href="/terms" className="hover:text-slate-400">
             Terms of Service
           </Link>
+          <Link
+            href="/admin/login"
+            className="text-slate-400 hover:text-white font-medium flex items-center gap-1.5 transition-colors"
+          >
+            <ShieldCheck className="w-3.5 h-3.5 text-[#C05646]" />
+            <span>Admin Portal</span>
+          </Link>
         </div>
       </div>
     </footer>
