@@ -6,13 +6,14 @@ import Link from "next/link";
 import { useAuthStore } from "@/store/useAuthStore";
 import { showToast } from "@/store/useToastStore";
 import { Logo } from "@/components/ui/Logo";
-import { Lock, Mail, ArrowRight, ShieldCheck, User } from "lucide-react";
+import { Lock, Mail, ArrowRight, User, ShieldCheck } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
   const { login } = useAuthStore();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,68 +22,54 @@ export default function LoginPage() {
       return;
     }
 
-    const isAdmin = email.toLowerCase().includes("admin");
-    login(email.trim(), isAdmin ? "ADMIN" : "CUSTOMER");
-    showToast(`Signed in successfully as ${isAdmin ? "Store Admin" : "Customer"}!`, "success");
+    setIsLoading(true);
 
-    if (isAdmin) {
-      router.push("/admin");
-    } else {
-      router.push("/account/orders");
-    }
+    // Regular client login is strictly for CUSTOMER accounts
+    login(email.trim(), "CUSTOMER");
+    showToast("Signed in successfully to your customer account!", "success");
+    setIsLoading(false);
+    router.push("/account/orders");
   };
 
-  const handleQuickLogin = (role: "CUSTOMER" | "ADMIN") => {
-    if (role === "ADMIN") {
-      login("admin@gscollection.pk", "ADMIN");
-      showToast("Signed in as Store Administrator!", "success");
-      router.push("/admin");
-    } else {
-      login("ayesha.malik@example.com", "CUSTOMER");
-      showToast("Signed in as Customer (Ayesha Malik)!", "success");
-      router.push("/account/orders");
-    }
+  const handleQuickCustomerDemo = () => {
+    login("ayesha.malik@example.com", "CUSTOMER");
+    showToast("Signed in as Customer (Ayesha Malik)!", "success");
+    router.push("/account/orders");
   };
 
   return (
     <div className="max-w-md mx-auto px-4 py-16 sm:py-24">
-      <div className="bg-white p-8 sm:p-10 rounded-3xl border border-slate-100 shadow-xl space-y-6">
+      <div className="bg-white p-8 sm:p-10 rounded-3xl border border-[#E7E4DE] shadow-xl space-y-6">
         <div className="text-center space-y-2">
           <Logo size="md" className="justify-center mb-3" />
-          <h1 className="text-2xl font-black text-slate-900">Welcome Back</h1>
-          <p className="text-xs text-slate-500">
-            Sign in to track orders, manage addresses, and view your saved kids styles.
+          <h1 className="text-2xl font-editorial font-bold text-[#0B132A]">
+            Client Account Sign In
+          </h1>
+          <p className="text-xs text-slate-500 font-light">
+            Sign in to track orders, manage delivery addresses, and view your saved wishlist.
           </p>
         </div>
 
-        {/* Quick Demo Login Badges for Instant Portfolio Testing */}
-        <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200/80 space-y-2 text-xs">
-          <span className="block font-bold text-slate-700 text-[11px] uppercase tracking-wider text-center">
-            🚀 1-Click Demo Evaluation Sign In
-          </span>
-          <div className="grid grid-cols-2 gap-2">
+        {/* Quick Customer Demo Button */}
+        <div className="bg-[#FAF8F5] p-3.5 rounded-2xl border border-[#E7E4DE] space-y-2 text-xs">
+          <div className="flex items-center justify-between">
+            <span className="font-semibold text-slate-700 text-[11px] uppercase tracking-wider">
+              1-Click Customer Demo
+            </span>
             <button
               type="button"
-              onClick={() => handleQuickLogin("CUSTOMER")}
-              className="py-2 px-2.5 bg-white hover:bg-slate-100 border border-slate-200 text-slate-800 rounded-xl font-bold flex items-center justify-center gap-1.5 shadow-2xs transition-all"
+              onClick={handleQuickCustomerDemo}
+              className="py-1.5 px-3 bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 rounded-xl font-bold flex items-center gap-1.5 shadow-2xs transition-all text-xs cursor-pointer"
             >
               <User className="w-3.5 h-3.5 text-sky-600" />
-              <span>Customer Demo</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => handleQuickLogin("ADMIN")}
-              className="py-2 px-2.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-900 rounded-xl font-bold flex items-center justify-center gap-1.5 shadow-2xs transition-all"
-            >
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Admin Demo</span>
+              <span>Sign in as Ayesha</span>
             </button>
           </div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4 text-xs">
           <div className="space-y-1">
-            <label className="font-bold text-slate-700">Email Address</label>
+            <label className="font-semibold text-slate-700">Email Address</label>
             <div className="relative flex items-center">
               <Mail className="absolute left-3.5 w-4 h-4 text-slate-400" />
               <input
@@ -91,15 +78,15 @@ export default function LoginPage() {
                 placeholder="name@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#E05A47]/20"
+                className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:border-[#C05646] focus:ring-1 focus:ring-[#C05646]/30 text-slate-900"
               />
             </div>
           </div>
 
           <div className="space-y-1">
             <div className="flex justify-between items-center">
-              <label className="font-bold text-slate-700">Password</label>
-              <span className="text-[11px] text-[#E05A47] hover:underline cursor-pointer">
+              <label className="font-semibold text-slate-700">Password</label>
+              <span className="text-[11px] text-[#C05646] hover:underline cursor-pointer">
                 Forgot password?
               </span>
             </div>
@@ -111,24 +98,36 @@ export default function LoginPage() {
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#E05A47]/20"
+                className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:border-[#C05646] focus:ring-1 focus:ring-[#C05646]/30 text-slate-900"
               />
             </div>
           </div>
 
           <button
             type="submit"
-            className="w-full py-3.5 bg-[#E05A47] hover:bg-[#C74433] text-white font-bold text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2"
+            disabled={isLoading}
+            className="w-full py-3.5 bg-[#0B132A] hover:bg-[#1E293B] text-white font-bold text-xs uppercase tracking-widest rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
-            <span>Sign In</span>
-            <ArrowRight className="w-4 h-4" />
+            <span>Sign In to Account</span>
+            <ArrowRight className="w-4 h-4 text-[#C05646]" />
           </button>
         </form>
 
-        <div className="text-center text-xs text-slate-500 pt-2 border-t">
+        <div className="text-center text-xs text-slate-500 pt-2 border-t border-slate-100">
           Don&apos;t have an account yet?{" "}
-          <Link href="/register" className="font-bold text-[#E05A47] hover:underline">
+          <Link href="/register" className="font-bold text-[#C05646] hover:underline">
             Create an Account
+          </Link>
+        </div>
+
+        {/* Dedicated Admin Portal Link */}
+        <div className="text-center pt-2">
+          <Link
+            href="/admin/login"
+            className="inline-flex items-center gap-1.5 text-[11px] text-slate-400 hover:text-slate-700 transition-colors"
+          >
+            <ShieldCheck className="w-3.5 h-3.5 text-[#C05646]" />
+            <span>Store Administrator Portal →</span>
           </Link>
         </div>
       </div>

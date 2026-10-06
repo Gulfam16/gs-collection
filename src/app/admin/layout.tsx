@@ -1,7 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Logo } from "@/components/ui/Logo";
 import { useAuthStore } from "@/store/useAuthStore";
 import {
@@ -12,9 +13,8 @@ import {
   Tag,
   FolderTree,
   ArrowLeft,
-  ShieldAlert,
   LogOut,
-  Bell,
+  ShieldCheck,
 } from "lucide-react";
 
 export default function AdminLayout({
@@ -23,7 +23,86 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const { user, logout } = useAuthStore();
+  const router = useRouter();
+  const { user, isAdmin, login, logout } = useAuthStore();
+  const [isVerifying, setIsVerifying] = useState(true);
+
+  // If we are on the login page itself, do not wrap in admin sidebar
+  const isLoginPage = pathname === "/admin/login";
+
+  useEffect(() => {
+    if (isLoginPage) {
+      setIsVerifying(false);
+      return;
+    }
+
+    let isMounted = true;
+
+    async function verifyAdminAuth() {
+      // 1. If client store already has an active ADMIN session
+      if (isAdmin && user?.role === "ADMIN") {
+        if (isMounted) setIsVerifying(false);
+        return;
+      }
+
+      // 2. Otherwise verify with the secure server-side HTTP-only session cookie
+      try {
+        const res = await fetch("/api/admin/auth/session");
+        if (!res.ok) throw new Error("No valid session");
+
+        const data = await res.json();
+        if (data.authenticated && data.user) {
+          login(data.user.email, "ADMIN");
+          if (isMounted) setIsVerifying(false);
+          return;
+        }
+      } catch {
+        // Session invalid or not found
+      }
+
+      // 3. Unauthorized: Redirect to /admin/login
+      if (isMounted) {
+        router.replace(
+          `/admin/login?redirect=${encodeURIComponent(pathname)}`
+        );
+      }
+    }
+
+    verifyAdminAuth();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [pathname, isLoginPage, isAdmin, user, login, router]);
+
+  const handleSignOut = async () => {
+    try {
+      await fetch("/api/admin/auth/logout", { method: "POST" });
+    } catch (e) {
+      console.error("Logout error", e);
+    }
+    logout();
+    router.replace("/admin/login");
+    router.refresh();
+  };
+
+  // If on login page, render child directly
+  if (isLoginPage) {
+    return <>{children}</>;
+  }
+
+  // Loading barrier while checking credentials
+  if (isVerifying) {
+    return (
+      <div className="min-h-screen bg-[#070B14] flex flex-col items-center justify-center space-y-4 text-slate-300">
+        <Logo size="lg" isDark={true} />
+        <div className="w-8 h-8 border-3 border-[#C05646] border-t-transparent rounded-full animate-spin mt-4" />
+        <p className="text-xs font-mono uppercase tracking-widest text-slate-400">
+          Verifying Administrator Privileges...
+        </p>
+      </div>
+    );
+  }
 
   const adminNav = [
     { href: "/admin", label: "Dashboard Overview", icon: LayoutDashboard },
@@ -41,8 +120,9 @@ export default function AdminLayout({
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <Logo size="md" isDark={true} />
-            <span className="text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800 font-bold px-2 py-0.5 rounded-full">
-              Admin
+            <span className="text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800 font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+              <ShieldCheck className="w-3 h-3" />
+              <span>Admin</span>
             </span>
           </div>
 
@@ -60,7 +140,7 @@ export default function AdminLayout({
                     href={item.href}
                     className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all ${
                       isActive
-                        ? "bg-[#E05A47] text-white shadow-md shadow-[#E05A47]/20"
+                        ? "bg-[#C05646] text-white shadow-md shadow-[#C05646]/20"
                         : "text-slate-400 hover:text-white hover:bg-slate-900"
                     }`}
                   >
@@ -77,14 +157,14 @@ export default function AdminLayout({
         <div className="pt-6 border-t border-slate-800 space-y-3">
           <Link
             href="/"
-            className="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-white transition-colors"
+            className="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-white transition-colors py-1"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="w-4 h-4 text-[#C05646]" />
             <span>Return to Public Store</span>
           </Link>
           <button
-            onClick={logout}
-            className="w-full flex items-center gap-2 px-3 py-2 text-xs font-semibold text-rose-400 hover:bg-rose-950/40 rounded-xl transition-colors"
+            onClick={handleSignOut}
+            className="w-full flex items-center gap-2 px-3 py-2 text-xs font-semibold text-rose-400 hover:bg-rose-950/40 rounded-xl transition-colors cursor-pointer"
           >
             <LogOut className="w-4 h-4" />
             <span>Sign Out Admin</span>
@@ -108,7 +188,7 @@ export default function AdminLayout({
             <span className="text-xs text-slate-400 hidden sm:inline-block">
               Logged in: <strong className="text-white">{user?.fullName || "Store Owner"}</strong>
             </span>
-            <div className="w-8 h-8 rounded-full bg-slate-800 text-[#E05A47] font-black flex items-center justify-center text-xs">
+            <div className="w-8 h-8 rounded-full bg-slate-800 text-[#C05646] font-black flex items-center justify-center text-xs border border-slate-700">
               GS
             </div>
           </div>

@@ -190,7 +190,7 @@ export function Footer() {
           <Link href="/terms" className="hover:text-slate-400">
             Terms of Service
           </Link>
-          <Link href="/admin" className="text-slate-400 hover:text-white font-medium">
+          <Link href="/admin/login" className="text-slate-400 hover:text-white font-medium">
             Admin Access
           </Link>
         </div>

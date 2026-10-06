@@ -236,16 +236,9 @@ export function Navbar() {
                       <Link
                         href="/login"
                         onClick={() => setUserDropdownOpen(false)}
-                        className="block px-3 py-2 text-xs font-bold text-slate-800 hover:bg-rose-50 hover:text-[#C05646] rounded-xl"
+                        className="block px-3 py-2 text-xs font-bold text-slate-800 hover:bg-[#FAF8F5] hover:text-[#C05646] rounded-xl"
                       >
                         Sign In / Register
-                      </Link>
-                      <Link
-                        href="/admin"
-                        onClick={() => setUserDropdownOpen(false)}
-                        className="block px-3 py-2 text-xs font-medium text-slate-500 hover:bg-slate-100 rounded-xl"
-                      >
-                        Store Admin Portal
                       </Link>
                     </div>
                   )}
@@ -343,13 +336,15 @@ export function Navbar() {
             >
               Contact Us
             </Link>
-            <Link
-              href="/admin"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-emerald-700 font-bold"
-            >
-              Admin Dashboard Portal
-            </Link>
+            {isMounted && isAdmin && (
+              <Link
+                href="/admin"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-2 text-emerald-700 font-bold"
+              >
+                Admin Dashboard Portal
+              </Link>
+            )}
           </nav>
         </div>
       )}
