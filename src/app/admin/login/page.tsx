@@ -72,12 +72,6 @@ function AdminLoginForm() {
     }
   };
 
-  const fillDefaultCredentials = () => {
-    setEmail("admin@gscollection.pk");
-    setPassword("GSadmin@2026!");
-    setErrorMessage("");
-  };
-
   return (
     <div className="min-h-screen bg-[#070B14] text-slate-100 flex flex-col justify-between p-4 sm:p-6 relative overflow-hidden select-none">
       {/* Ambient Radial Lights */}
@@ -139,7 +133,7 @@ function AdminLoginForm() {
                 <input
                   type="email"
                   required
-                  placeholder="admin@gscollection.pk"
+                  placeholder="admin@domain.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 bg-slate-950/70 border border-slate-800 rounded-xl text-white placeholder:text-slate-600 focus:outline-hidden focus:border-[#C05646] focus:ring-1 focus:ring-[#C05646]/40 transition-all font-mono text-xs"
@@ -188,28 +182,6 @@ function AdminLoginForm() {
               )}
             </button>
           </form>
-
-          {/* Secure Credential Autofill Helper for the Store Owner */}
-          <div className="pt-2 border-t border-slate-800/80">
-            <div className="bg-slate-950/60 p-3 rounded-2xl border border-slate-800/80 space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
-                  Store Owner Key
-                </span>
-                <button
-                  type="button"
-                  onClick={fillDefaultCredentials}
-                  className="text-[11px] font-bold text-[#C05646] hover:text-[#d16a5a] underline transition-colors cursor-pointer"
-                >
-                  Quick Fill Credentials
-                </button>
-              </div>
-              <div className="text-[11px] font-mono text-slate-400 space-y-0.5">
-                <p>Email: <span className="text-slate-200">admin@gscollection.pk</span></p>
-                <p>Password: <span className="text-slate-200">GSadmin@2026!</span></p>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Security Warning Notice */}

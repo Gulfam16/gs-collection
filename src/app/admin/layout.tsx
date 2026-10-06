@@ -39,14 +39,8 @@ export default function AdminLayout({
     let isMounted = true;
 
     async function verifyAdminAuth() {
-      // 1. If client store already has an active ADMIN session
-      if (isAdmin && user?.role === "ADMIN") {
-        if (isMounted) setIsVerifying(false);
-        return;
-      }
-
-      // 2. Otherwise verify with the secure server-side HTTP-only session cookie
       try {
+        // Strictly verify with the server-side HTTP-only session cookie
         const res = await fetch("/api/admin/auth/session");
         if (!res.ok) throw new Error("No valid session");
 
@@ -57,10 +51,11 @@ export default function AdminLayout({
           return;
         }
       } catch {
-        // Session invalid or not found
+        // Session invalid or absent
       }
 
-      // 3. Unauthorized: Redirect to /admin/login
+      // Unauthorized: clear client store and redirect to /admin/login
+      logout();
       if (isMounted) {
         router.replace(
           `/admin/login?redirect=${encodeURIComponent(pathname)}`

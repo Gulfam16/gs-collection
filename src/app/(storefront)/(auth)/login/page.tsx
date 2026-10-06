@@ -119,17 +119,6 @@ export default function LoginPage() {
             Create an Account
           </Link>
         </div>
-
-        {/* Dedicated Admin Portal Link */}
-        <div className="text-center pt-2">
-          <Link
-            href="/admin/login"
-            className="inline-flex items-center gap-1.5 text-[11px] text-slate-400 hover:text-slate-700 transition-colors"
-          >
-            <ShieldCheck className="w-3.5 h-3.5 text-[#C05646]" />
-            <span>Store Administrator Portal →</span>
-          </Link>
-        </div>
       </div>
     </div>
   );
