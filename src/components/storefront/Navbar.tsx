@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Logo } from "@/components/ui/Logo";
@@ -23,17 +23,22 @@ import { MOCK_CATEGORIES } from "@/lib/mockData";
 
 export function Navbar() {
   const router = useRouter();
+  const [isMounted, setIsMounted] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
 
-  const { setIsOpen: setCartOpen, getTotalItems, getSubtotal } = useCartStore();
+  const { setIsOpen: setCartOpen, getTotalItems } = useCartStore();
   const { items: wishlistItems } = useWishlistStore();
   const { user, isAuthenticated, isAdmin, logout } = useAuthStore();
 
-  const cartItemCount = getTotalItems();
-  const wishlistItemCount = wishlistItems.length;
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const cartItemCount = isMounted ? getTotalItems() : 0;
+  const wishlistItemCount = isMounted ? wishlistItems.length : 0;
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -179,7 +184,7 @@ export function Navbar() {
 
               {userDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-slate-100 p-2 z-50 animate-in fade-in zoom-in-95 duration-150">
-                  {isAuthenticated ? (
+                  {isMounted && isAuthenticated ? (
                     <>
                       <div className="px-3 py-2 border-b border-slate-100">
                         <p className="text-xs font-bold text-slate-900 truncate">

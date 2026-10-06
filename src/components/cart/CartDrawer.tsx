@@ -5,11 +5,12 @@ import { formatPrice } from "@/lib/utils";
 import { X, Plus, Minus, Trash2, ShoppingBag, ArrowRight, Tag, CheckCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MOCK_COUPONS } from "@/lib/mockData";
 import { showToast } from "@/store/useToastStore";
 
 export function CartDrawer() {
+  const [isMounted, setIsMounted] = useState(false);
   const {
     items,
     isOpen,
@@ -24,6 +25,10 @@ export function CartDrawer() {
     applyCoupon,
     removeCoupon,
   } = useCartStore();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const [couponInput, setCouponInput] = useState("");
   const subtotal = getSubtotal();
@@ -56,7 +61,7 @@ export function CartDrawer() {
     setCouponInput("");
   };
 
-  if (!isOpen) return null;
+  if (!isMounted || !isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex justify-end">

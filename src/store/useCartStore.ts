@@ -120,6 +120,7 @@ export const useCartStore = create<CartStore>()(
     }),
     {
       name: "gs-collection-cart-storage",
+      partialize: (state) => ({ items: state.items, coupon: state.coupon }),
     }
   )
 );

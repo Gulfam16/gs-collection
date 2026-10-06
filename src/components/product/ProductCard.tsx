@@ -8,7 +8,7 @@ import { showToast } from "@/store/useToastStore";
 import { Heart, Star, ShoppingBag, Eye, Check } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface ProductCardProps {
   product: Product;
@@ -16,15 +16,20 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, onQuickView }: ProductCardProps) {
+  const [isMounted, setIsMounted] = useState(false);
   const { addItem } = useCartStore();
   const { toggleWishlist, isInWishlist } = useWishlistStore();
   const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
   const [isAdding, setIsAdding] = useState(false);
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const activeVariant = product.variants[selectedVariantIdx] || product.variants[0];
   const primaryImage = product.images.find((i) => i.isPrimary) || product.images[0];
   const discountPercent = calculateDiscount(product.basePrice, product.salePrice);
-  const inWishlist = isInWishlist(product.id);
+  const inWishlist = isMounted ? isInWishlist(product.id) : false;
   const isOutOfStock = !activeVariant || activeVariant.stockQuantity <= 0;
 
   // Extract unique colors available across variants
