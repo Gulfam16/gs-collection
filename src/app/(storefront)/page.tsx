@@ -86,23 +86,12 @@ export default function HomePage() {
             </div>
 
             {/* Right Hero Image Composition with Floating Animated Badges */}
-            <div className="lg:col-span-5 relative animate-scale-in">
-              {/* Outer Decorative Luxury Border */}
-              <div className="relative mx-auto w-full max-w-md aspect-4/5 rounded-[32px] overflow-hidden shadow-2xl border-8 border-white bg-slate-100 ring-1 ring-[#E7E4DE]">
-                <Image
-                  src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?q=80&w=1000&auto=format&fit=crop"
-                  alt="GS Collection Children's Luxury Boutique Clothing"
-                  fill
-                  priority
-                  className="object-cover"
-                />
-
-                {/* Subtle Gradient Overlay at Bottom */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B132A]/40 via-transparent to-transparent pointer-events-none" />
-
-                {/* Floating Badge 1: Top Floating Quality Badge */}
-                <div className="absolute top-6 left-6 animate-float z-20 pointer-events-none">
-                  <div className="px-4 py-2.5 rounded-2xl bg-white/95 backdrop-blur-md shadow-xl border border-white/80 flex items-center gap-2.5">
+            <div className="lg:col-span-5 relative animate-scale-in flex justify-center items-center py-4">
+              {/* Outer Wrapper for floating badges and proper alignment */}
+              <div className="relative w-full max-w-md">
+                {/* Floating Badge 1: Top Floating Quality Badge (positioned cleanly to not overlap faces) */}
+                <div className="absolute -top-3 -left-2 sm:-left-4 animate-float z-30 pointer-events-none">
+                  <div className="px-4 py-2.5 rounded-2xl bg-white/95 backdrop-blur-md shadow-xl border border-white/90 flex items-center gap-2.5 ring-1 ring-slate-200/60">
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 ring-4 ring-emerald-100" />
                     <div>
                       <p className="text-[10px] uppercase tracking-widest font-bold text-slate-500">Fabric Standard</p>
@@ -111,21 +100,36 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                {/* Floating Badge 2: Bottom Reviews Card */}
-                <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-white/95 backdrop-blur-md shadow-xl border border-white/80 flex items-center gap-3.5 animate-float-reverse z-20">
-                  <div className="w-11 h-11 rounded-xl bg-[#0B132A] text-[#C5A059] flex items-center justify-center font-bold shrink-0 shadow-sm">
-                    <Star className="w-5 h-5 fill-current" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-1 mb-0.5">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-3 h-3 text-[#C5A059] fill-current" />
-                      ))}
-                      <span className="text-xs font-bold text-[#0B132A] ml-1">4.9 / 5.0</span>
+                {/* Outer Decorative Luxury Border */}
+                <div className="relative mx-auto w-full aspect-[4/5] rounded-[32px] overflow-hidden shadow-2xl border-8 border-white bg-slate-100 ring-1 ring-[#E7E4DE]">
+                  <Image
+                    src="/images/two-boys-hero.jpg"
+                    alt="GS Collection (Gullu Shani) - Luxury Children's Boutique Clothing"
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 100vw, 480px"
+                    className="object-cover object-top"
+                  />
+
+                  {/* Subtle Gradient Overlay at Bottom */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B132A]/50 via-transparent to-transparent pointer-events-none" />
+
+                  {/* Floating Badge 2: Bottom Reviews Card */}
+                  <div className="absolute bottom-5 left-5 right-5 p-4 rounded-2xl bg-white/95 backdrop-blur-md shadow-xl border border-white/80 flex items-center gap-3.5 animate-float-reverse z-20">
+                    <div className="w-11 h-11 rounded-xl bg-[#0B132A] text-[#C5A059] flex items-center justify-center font-bold shrink-0 shadow-sm">
+                      <Star className="w-5 h-5 fill-current" />
                     </div>
-                    <p className="text-[11px] text-slate-600 truncate">
-                      Loved by 5,000+ discerning parents across Pakistan
-                    </p>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-1 mb-0.5">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="w-3 h-3 text-[#C5A059] fill-current" />
+                        ))}
+                        <span className="text-xs font-bold text-[#0B132A] ml-1">4.9 / 5.0</span>
+                      </div>
+                      <p className="text-[11px] text-slate-600 truncate">
+                        Loved by 5,000+ discerning parents across Pakistan
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
